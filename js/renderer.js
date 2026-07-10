@@ -271,8 +271,8 @@ document.getElementById(
     <div class="question-content">
 
         <div class="question-badge">
-    Q. ${index + 1}${index === 0 ? " • AJ01" : ""}
-</div>
+    Q. ${index + 1}${index === 0 ? " • AJ02" : ""}
+</div
 
         <div class="question-text">
             ${question.question}
