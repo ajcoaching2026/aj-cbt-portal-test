@@ -135,6 +135,20 @@ document.getElementById(
 
     `;
 }
+function renderQuestionText(text) {
+    
+    return formatText(text || "");
+    
+}
+
+
+function renderOptionText(text) {
+    
+    return formatText(text || "");
+    
+}
+
+
 function renderOptions(question, mode = "exam") {
     
     const options = [
@@ -193,16 +207,16 @@ function renderOptions(question, mode = "exam") {
     </span>
 
     <span class="option-text">
-        ${text}
-    </span>
+    ${renderOptionText(text)}
+</span>
 
 </button>
 
 `;
         
     }).join("");
-    
 }
+    
 
 function showExam(question, index, total) {
     hideAllScreens();
@@ -272,10 +286,10 @@ document.getElementById(
 
         <div class="question-badge">
     Q. ${index + 1}${index === 0 ? " • AJ02" : ""}
-</div
+</div>
 
         <div class="question-text">
-            ${question.question}
+            ${renderQuestionText(question.question)}
         </div>
 
     </div>
@@ -837,7 +851,7 @@ Unattempted
         </div>
 
         <div class="question-text">
-            ${currentQuestion.question}
+            ${renderQuestionText(currentQuestion.question)}
         </div>
 
     </div>
