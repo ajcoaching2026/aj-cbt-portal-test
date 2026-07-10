@@ -135,6 +135,75 @@ document.getElementById(
 
     `;
 }
+function renderOptions(question, mode = "exam") {
+    
+    const options = [
+        question.option1,
+        question.option2,
+        question.option3,
+        question.option4
+    ];
+    
+    // Future Support (Option E)
+    if (question.option5Text) {
+        options.push(question.option5Text);
+    }
+    
+    return options.map((text, i) => {
+        
+        const optionNo = String(i + 1);
+        const optionLabel = String.fromCharCode(65 + i);
+        
+        let stateClass = "";
+        
+        if (mode === "exam") {
+            
+            if (question.userAnswer === optionNo) {
+                stateClass = "selected";
+            }
+            
+        } else if (mode === "review") {
+    
+    // Always highlight the correct answer
+    if (question.answerNumber === optionNo) {
+        stateClass = "correct";
+    }
+    
+    // Mark wrong only for A-D.
+    // Option E (Unattempted Question) should never become red.
+    else if (
+        question.userAnswer === optionNo &&
+        optionNo !== "5"
+    ) {
+        stateClass = "wrong";
+    }
+    
+}
+        
+        return `
+
+<button
+    class="option-btn ${stateClass}"
+    ${mode === "exam"
+        ? `data-option="${optionNo}"`
+        : ""}>
+
+    <span class="option-label">
+        ${optionLabel}.
+    </span>
+
+    <span class="option-text">
+        ${text}
+    </span>
+
+</button>
+
+`;
+        
+    }).join("");
+    
+}
+
 function showExam(question, index, total) {
     hideAllScreens();
 
@@ -142,8 +211,7 @@ document.getElementById(
     "exam-screen"
 ).style.display = "block";
 
-    const selectedAnswer =
-        question.userAnswer || "";
+
         
         
     document.getElementById(
@@ -217,81 +285,11 @@ document.getElementById(
 
 <div class="options-box">
 
-    <button
-        class="option-btn ${selectedAnswer=="1" ? "selected" : ""}"
-        data-option="1">
-
-        <span class="option-label">
-            A.
-        </span>
-
-        <span class="option-text">
-            ${question.option1}
-        </span>
-
-    </button>
-
-    <button
-        class="option-btn ${selectedAnswer=="2" ? "selected" : ""}"
-        data-option="2">
-
-        <span class="option-label">
-            B.
-        </span>
-
-        <span class="option-text">
-            ${question.option2}
-        </span>
-
-    </button>
-
-    <button
-        class="option-btn ${selectedAnswer=="3" ? "selected" : ""}"
-        data-option="3">
-
-        <span class="option-label">
-            C.
-        </span>
-
-        <span class="option-text">
-            ${question.option3}
-        </span>
-
-    </button>
-
-    <button
-        class="option-btn ${selectedAnswer=="4" ? "selected" : ""}"
-        data-option="4">
-
-        <span class="option-label">
-            D.
-        </span>
-
-        <span class="option-text">
-            ${question.option4}
-        </span>
-
-    </button>
-
-    ${question.option5Text ? `
-
-    <button
-        class="option-btn ${selectedAnswer=="5" ? "selected" : ""}"
-        data-option="5">
-
-        <span class="option-label">
-            E.
-        </span>
-
-        <span class="option-text">
-            ${question.option5Text}
-        </span>
-
-    </button>
-
-    ` : ""}
+    ${renderOptions(question, "exam")}
 
 </div>
+
+
 
 <div class="bottom-actions">
 
@@ -832,59 +830,27 @@ Unattempted
 
 <div class="question-box">
 
-    <div class="question-id">
-        Q. ${currentQuestion.index + 1}
-    </div>
+    <div class="question-content">
 
-    <div class="question-text">
-        ${currentQuestion.question}
+        <div class="question-badge">
+            Q. ${currentQuestion.index + 1}
+        </div>
+
+        <div class="question-text">
+            ${currentQuestion.question}
+        </div>
+
     </div>
 
 </div>
 
+<hr class="question-divider">
+
         <div class="options-box">
 
-            <button class="option-btn ${
-                currentQuestion.answerNumber == "1"
-                ? "correct"
-                : currentQuestion.userAnswer == "1"
-                ? "wrong"
-                : ""
-            }">
-                A. ${currentQuestion.option1}
-            </button>
+    ${renderOptions(currentQuestion, "review")}
 
-            <button class="option-btn ${
-                currentQuestion.answerNumber == "2"
-                ? "correct"
-                : currentQuestion.userAnswer == "2"
-                ? "wrong"
-                : ""
-            }">
-                B. ${currentQuestion.option2}
-            </button>
-
-            <button class="option-btn ${
-                currentQuestion.answerNumber == "3"
-                ? "correct"
-                : currentQuestion.userAnswer == "3"
-                ? "wrong"
-                : ""
-            }">
-                C. ${currentQuestion.option3}
-            </button>
-
-            <button class="option-btn ${
-                currentQuestion.answerNumber == "4"
-                ? "correct"
-                : currentQuestion.userAnswer == "4"
-                ? "wrong"
-                : ""
-            }">
-                D. ${currentQuestion.option4}
-            </button>
-
-        </div>
+</div>
 <div class="review-summary">
 
     <div class="review-answer-box">
