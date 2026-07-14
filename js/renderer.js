@@ -390,178 +390,283 @@ document.getElementById(
 
     <div class="exam-container">
 
+        <div class="result-header">
+<div class="result-header">
+
+    <div class="result-page-title">
+
+        Test Result
+
+    </div>
+
+    <div class="result-brand">
+
         <img
-src="assets/logo.png"
-class="logo">
+        src="assets/logo.png"
+        class="result-logo">
 
-<h2 class="result-academy">
+        <div class="result-brand-text">
 
-AJ हिंGLISH Academy
+            <div class="result-academy">
 
-</h2>
+                AJ हिंGLISH Academy
 
-<div class="result-divider"></div>
+            </div>
 
-<h1 class="result-title">
+            <div class="result-tagline">
 
-TEST RESULT
+                <span class="tag-orange">ज्ञान</span>
 
-</h1>
-        ${
+                <span class="tag-dot">•</span>
+
+                <span class="tag-blue">Growth</span>
+
+                <span class="tag-dot">•</span>
+
+                <span class="tag-orange">Success</span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+            ${
 result.disqualified
 ?
 `
 <div class="disqualified-box">
 
-    <h3>
-        ⚠️ अयोग्यता सूचना
-    </h3>
+    <div class="disq-left">
 
-    <div class="disq-line">
+        <div class="disq-title">
 
-    ❌ <strong>छोड़े गए प्रश्न :</strong>
-    ${result.blankCount}
+            ⚠️ अयोग्यता सूचना
 
-</div>
+        </div>
 
-<div class="disq-line">
+        <div class="disq-item">
 
-    ✅ <strong>अनुमत सीमा :</strong>
-    ${Math.floor(result.total * 0.10)} प्रश्न
+            ❌ <strong>छोड़े गए प्रश्न :</strong>
 
-</div>
+            ${result.blankCount}
 
-<div class="disq-rule">
+        </div>
 
-    <strong>RPSC नियम:</strong><br>
+        <div class="disq-item">
 
-    10% से अधिक प्रश्नों में किसी भी विकल्प को अंकित नहीं करने पर अभ्यर्थी अयोग्य माना जाएगा।
+            ✅ <strong>अनुमत सीमा :</strong>
 
-</div>
-  
+            ${Math.floor(result.total * 0.10)} प्रश्न
+
+        </div>
+
+    </div>
+
+    <div class="disq-divider"></div>
+
+    <div class="disq-right">
+
+        <div class="disq-rule-title">
+
+            RPSC नियम:
+
+        </div>
+
+        <div class="disq-rule-text">
+
+            10% से अधिक प्रश्नों में किसी भी विकल्प को अंकित नहीं करने पर अभ्यर्थी अयोग्य माना जाएगा।
+
+        </div>
+
+    </div>
+
 </div>
 `
 :
 ""
 }
+<div class="score-banner">
+    <div class="score-left">
+
+        <div class="score-trophy">
+
+            🏆
+
+        </div>
+
+        <div class="score-content">
+
+            <div class="score-label">
+
+                Your Score
+
+            </div>
+
+            <div class="score-main">
+
+                ${result.score}
+                <span>/ ${result.maximumMarks}</span>
+
+            </div>
+
+        </div>
+
+    </div>
+ 
         
-        <div class="result-stats">
+        
+   <div class="score-badge">
+
+        ${result.percentage}%
+
+    </div>
+
+</div>
+<div class="result-stats">
 
     <div class="result-card correct-card">
 
-        <div>✅ Correct Answers</div>
+        <div class="result-card-icon">✓</div>
 
-        <h2>${result.correct}</h2>
+        <div class="result-card-title">
+            Correct
+        </div>
 
-        <small>
-    +${result.correctMarks} Marks
-</small>
+        <h2 class="correct-number">${result.correct}</h2>
+
+        <div class="result-card-subtitle">
+            Questions
+        </div>
+
+        <div class="marks-chip positive-chip">
+            +${result.correctMarks} Marks
+        </div>
 
     </div>
 
     <div class="result-card wrong-card">
 
-        <div>❌ Incorrect Answers</div>
+        <div class="result-card-icon">✕</div>
 
-        <h2>${result.wrong}</h2>
+        <div class="result-card-title">
+            Incorrect
+        </div>
 
-        <small>
-    -${result.negativeMarks} Marks
-</small>
+        <h2 class="wrong-number">${result.wrong}</h2>
+
+        <div class="result-card-subtitle">
+            Questions
+        </div>
+
+        <div class="marks-chip negative-chip">
+            -${result.negativeMarks} Marks
+        </div>
 
     </div>
 
     <div class="result-card unattempted-card">
 
-        <div>⚪ Left Blank</div>
+        <div class="result-card-icon">○</div>
 
-        <h2>${result.blankCount}</h2>
+        <div class="result-card-title">
+            Not Attempted
+        </div>
 
-        <small>
-            No Marks
-        </small>
+        <h2 class="blank-number">${result.blankCount}</h2>
 
-    </div>
-    <div class="result-card optione-card">
+        <div class="result-card-subtitle">
+            Questions
+        </div>
 
-    <div>🟡 Option E</div>
+        <div class="marks-chip neutral-chip">
+            0 Marks
+        </div>
 
-    <h2>${result.optionECount}</h2>
-
-    <small>(No Marks)</small>
-
-</div>
-
-</div>
-
-<div class="summary-card maximum-card">
-
-    <div>🏆 Your Marks</div>
-
-    <h2>
-        ${result.score}
-    </h2>
-
-    <small>
-        Maximum Marks : ${result.maximumMarks}
-    </small>
-
-</div>
-
-    <div class="summary-card percentage-card">
-
-        <div>📊 Percentage</div>
-
-        <h2>
-            ${result.percentage}%
-        </h2>
-
-    </div>
-
-
-
-    </div>
-
-<div class="result-info-bar">
-
-    <div>
-        ⏱ Time Taken :
-        <strong>
-            ${result.timeTaken}
-        </strong>
-    </div>
-
-    <div>
-        📘 Total Questions :
-        <strong>
-            ${result.total}
-        </strong>
-    </div>
-
-    <div>
-        📝 Attempted :
-        <strong>
-            ${result.attempted}
-        </strong>
     </div>
 
 </div>
 
+
+<div class="test-summary-card">
+
+    <div class="test-summary-title">
+
+        📋 Test Summary
+
+    </div>
+
+    <div class="test-summary-grid">
+
+      <div class="summary-item">
+
+    <div class="summary-icon">📋</div>
+
+    <div class="summary-label">
+        Total Questions
+    </div>
+
+    <div class="summary-value">
+        ${result.total}
+    </div>
+
+</div>
+
+<div class="summary-item">
+
+    <div class="summary-icon">✅</div>
+
+    <div class="summary-label">
+        Attempted
+    </div>
+
+    <div class="summary-value">
+        ${result.attempted}
+    </div>
+
+</div>
+
+<div class="summary-item">
+
+    <div class="summary-icon">🕒</div>
+
+    <div class="summary-label">
+        Time Taken
+    </div>
+
+    <div class="summary-value">
+        ${result.timeTaken}
+    </div>
+
+</div>    </div>
+
+</div>
         <div class="result-buttons">
 
-    <button id="reviewAnswersBtn">
-        Review Answers
+    <button
+        id="reviewAnswersBtn"
+        class="primary-btn">
+
+        📖 Review Answers
+
     </button>
 
-    <button id="restartTestBtn">
-        Restart Test
+    <button
+        id="restartTestBtn"
+        class="secondary-btn">
+
+        🔄 Restart Test
+
     </button>
 
     <button
         id="joinTelegramResult"
         class="telegram-btn">
 
-        🚀 For More Tests
+        📚 For More Testss
 
     </button>
 
