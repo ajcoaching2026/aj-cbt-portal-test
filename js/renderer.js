@@ -489,43 +489,39 @@ result.disqualified
 :
 ""
 }
+
 <div class="score-banner">
+
     <div class="score-left">
 
         <div class="score-trophy">
-
-            🏆
-
+            <img src="assets/trophy.png" alt="Trophy">
         </div>
 
         <div class="score-content">
 
             <div class="score-label">
-
                 Your Score
-
             </div>
 
             <div class="score-main">
 
-                ${result.score}
-                <span>/ ${result.maximumMarks}</span>
+                <span class="score-value">${result.score}</span>
 
+                <span class="score-total">/ ${result.maximumMarks}</span>
+
+            </div>
+
+            <div class="score-badge">
+                ${result.percentage}%
             </div>
 
         </div>
 
     </div>
- 
-        
-        
-   <div class="score-badge">
-
-        ${result.percentage}%
-
-    </div>
 
 </div>
+
 <div class="result-stats">
 
     <div class="result-card correct-card">

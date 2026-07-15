@@ -2040,10 +2040,8 @@ width:100%;
   
   border-radius: 22px;
   
-  background: linear-gradient(135deg, #2563eb, #3b82f6);
-  
-  box-shadow: 0 16px 34px rgba(37, 99, 235, .25);
-  
+background:linear-gradient(135deg,#0b4fe8 0%,#2563eb 55%,#3b82f6 100%);  
+box-shadow:0 10px 28px rgba(37,99,235,.28);
 }
 
 .score-left {
@@ -2057,16 +2055,10 @@ width:100%;
 }
 
 .score-trophy {
-  width:52px;
   
-height:52px;
-
-font-size:26px;
-
+  width: 88px;
   
-  border-radius: 50%;
-  
-  background: rgba(255, 255, 255, .18);
+  height: 88px;
   
   display: flex;
   
@@ -2074,6 +2066,9 @@ font-size:26px;
   
   justify-content: center;
   
+  flex-shrink: 0;
+  
+  overflow: visible;
   
 }
 
@@ -2266,15 +2261,15 @@ font-size:26px;
   
   justify-content: center;
   
-  min-width: 70px;
+  min-width: 64px;
   
-  height: 22px;
+  height: 20px;
   
-  padding: 0 8px;
+  padding: 0 6px;
   
   border-radius: 999px;
   
-  font-size: 10px;
+  font-size: 9px;
   
   font-weight: 700;
   
@@ -2419,13 +2414,13 @@ gap:8px;
   
   width: 100%;
   
-  height: 54px;
+  height: 50px;
   
   border: none;
   
-  border-radius: 16px;
+  border-radius: 14px;
   
-  font-size: 17px;
+  font-size: 16px;
   
   font-weight: 700;
   
@@ -2443,7 +2438,7 @@ gap:8px;
   
   border: none;
   
-  box-shadow: 0 8px 20px rgba(37, 99, 235, .18);
+  box-shadow:0 6px 16px rgba(37,99,235,.16);
   
   font-weight: 700;
   
@@ -2456,8 +2451,7 @@ border:1.5px solid #fdba74;
 
 color:#ea580c;
 
-box-shadow:0 6px 16px rgba(249, 115, 22, .08);
-
+box-shadow:0 4px 12px rgba(249,115,22,.06);
   border: 2px solid #fed7aa;
   
 }
@@ -2468,7 +2462,7 @@ box-shadow:0 6px 16px rgba(249, 115, 22, .08);
   
   color: #fff;
   
-  box-shadow:0 8px 22px rgba(249,115,22,.22);
+  box-shadow:0 6px 16px rgba(249,115,22,.18);
   
 }
 
@@ -2495,13 +2489,14 @@ filter:brightness(1.03);
   
   text-align: center;
   
-  margin-top: 10px;
+  margin-top: 6px;
   
   color: #64748b;
   
-  font-size: 14px;
+  font-size: 13px;
   
   font-weight: 500;
+  
   
 }
 
@@ -2519,65 +2514,220 @@ filter:brightness(1.03);
   
   grid-template-columns: repeat(3, 1fr);
   
-  gap: 6px;
+  gap: 3px;
   
-  margin: 16px 0;
-  
-}
-  
-  .score-banner {
-  
-  flex-direction: row;
-  
-  align-items: center;
-  
-  justify-content: space-between;
-  
-  gap: 12px;
-  
-  padding:18px 20px;
-  min-height:88px;
+  margin: 6px 0 6px 0;
   
 }
+  /* =======================================================
+     SCORE BANNER - SCREEN PAR SABSE MAIN AUR BADA DIKHEGA
+     ======================================================= */
   
-  .score-left {
+  .score-banner{
+
+display:flex;
+
+align-items:center;
+justify-content:space-between;
+
+gap:14px;
+width:100%;
+
+min-height:126px;
+
+padding:16px 22px;
+
+margin:8px 0;
+
+border-radius:22px;
+
+background:linear-gradient(
+135deg,
+#082a8d 0%,
+#0b39b6 45%,
+#1f63ff 100%
+);
+
+box-shadow:
+0 14px 34px rgba(0,53,180,.30),
+inset 0 1px 0 rgba(255,255,255,.08);
+
+overflow:hidden;
+
+position:relative;
+
+
+
+}
+
   
-  width: auto;
+.score-left {
   
   display: flex;
   
   align-items: center;
   
-  gap: 8px;
+  justify-content: flex-start;
+  
+  gap: 16px;
+  
+  width: 100%;
+  
+}
+
+.score-trophy {
+  
+  width: 88px;
+  
+  height: 88px;
+  
+  display: flex;
+  
+  align-items: center;
+  
+  justify-content: center;
+  
+  flex-shrink: 0;
+  
+  position: relative;
+  
+  z-index: 2;
+  
+  overflow: visible;
+  
+}
+.score-trophy img {
+  
+  width: 150px;
+  
+  height: auto;
+  
+  display: block;
+  
+  object-fit: contain;
+  
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, .22));
   
 }
   
-  .score-main {
-    
-    font-size: 42px;
-    
-    white-space: nowrap;
-    
-  }
+.score-main {
   
-  .score-main span {
-    
-    font-size: 20px;
-    
-  }
+  display: flex;
   
-  .score-badge {
+  align-items: baseline;
   
-  align-self: auto;
+  justify-content: flex-start;
   
-  min-width: 62px;
+  gap: 6px;
   
-  height: 34px;
+  white-space: nowrap;
   
-  font-size: 15px;
+  line-height: 1;
+  
+  margin: 0;
   
 }
   
+  
+  
+  .score-badge{
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+align-self:center;
+
+margin-top:14px;
+
+width:150px;
+
+height:42px;
+
+border-radius:999px;
+
+background:linear-gradient(
+180deg,
+rgba(79,125,255,.95),
+rgba(38,84,214,.96)
+);
+
+border:1px solid rgba(255,255,255,.12);
+
+box-shadow:
+inset 0 1px 2px rgba(255,255,255,.10),
+0 6px 14px rgba(0,0,0,.18);
+
+font-size:20px;
+
+font-weight:800;
+
+color:rgba(255,255,255,.96);
+
+letter-spacing:.3px;
+
+}
+  
+  .score-content {
+  
+  display: flex;
+  
+  flex-direction: column;
+  
+  justify-content: center;
+  
+  align-items: flex-start;
+  
+  flex: 1;
+  
+  padding-left: 4px;
+  
+  z-index: 2;
+  
+}
+  .score-label {
+  
+  font-size: 22px;
+  
+  font-weight: 700;
+  
+  color: rgba(255, 255, 255, .95);
+  
+  margin-bottom: 6px;
+  
+  line-height: 1;
+  
+}
+ .score-value {
+  
+  font-size: 56px;
+  
+  font-weight: 900;
+  
+  line-height: .9;
+  
+  color: #ffd21e;
+  
+  display: inline-block;
+  
+}
+.score-total {
+  
+  display: inline-block;
+  
+  font-size: 22px;
+  
+  font-weight: 700;
+  
+  color: #ffffff;
+  
+  margin: 0;
+  
+  padding-bottom: 6px;
+  
+}
   .test-summary-grid {
   
   display: grid;
@@ -2587,20 +2737,14 @@ filter:brightness(1.03);
   gap: 0;
   
 }
-  .result-logo {
-  
-  width: 110px;
-  
-  margin-bottom: 12px;
-  
-}
+
 .result-academy {
   
-  font-size: 20px;
+  font-size: 18px;
   
   line-height: 1.1;
   
-  margin-bottom: 4px;
+  margin-bottom: 2px;
   
 }
 .result-title {
@@ -2617,20 +2761,20 @@ filter:brightness(1.03);
 }
 .result-page-title {
   
-  font-size: 28px;
-  
-  margin-bottom: 6px;
-  
+  font-size: 26px;
+
+margin-bottom: 2px;
+
+padding-bottom: 4px !important;
     border-bottom:1px solid #e5e7eb;
 
-    padding-bottom:14px;
 
     width:100%;
   
 }
 
 .result-brand {
-  gap: 4px;
+  gap: 2px;
   align-items: center;
 }
 .result-brand-text {
@@ -2639,30 +2783,25 @@ filter:brightness(1.03);
   
 }
 .result-header {
+  margin-top: 6px !important;
   
-  margin-bottom: 2px;
-  
+margin-bottom: -4px !important;  /* Ye gap ko zabardasti upar kheenchyga */
+  padding-bottom: 0px !important;
 }
 .result-logo {
   
-  width: 72px;
+  width: 68px;
   
 }
 
-.result-academy {
-  
-  font-size: 18px;
-  
-  margin-bottom: 2px;
-  
-}
+
 
 .result-tagline {
   
   font-size: 13px;
   
   margin-top: 4px;
-  
+  margin-bottom: 8px !important;
 }
 
 .tag-dot {
@@ -2681,8 +2820,9 @@ filter:brightness(1.03);
   
   gap: 12px;
   
-  padding: 16px;
-margin:2px 0 4px;
+padding:10px 14px 0px;
+margin-top: 10px !important;
+margin-bottom: 0px !important;
 }
 
 .disq-divider {
@@ -2712,7 +2852,7 @@ margin:2px 0 4px;
 }
 
 .disq-title {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   white-space: nowrap;
   margin-left: -10px;
@@ -2720,18 +2860,20 @@ margin:2px 0 4px;
 
 .disq-item {
   font-size: 12px;
-  line-height: 1.45;
+  line-height: 1.3;
+  margin-bottom: 0px !important;
 }
 
 .disq-rule-title {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   margin-bottom: 6px;
 }
 .disq-rule-text {
   font-size: 12px;
-  line-height: 1.45;
+  line-height: 1.3;
   text-align: justify;
+  margin-bottom: 0px !important;
 }
 .correct-number {
   color: #16a34a;
@@ -2741,6 +2883,12 @@ margin:2px 0 4px;
 }
 .blank-number {
   color: #475569;
+}
+
+.result-card {
+  
+  padding: 10px 5px;
+  
 }
 .result-card-title {
   
@@ -2755,15 +2903,11 @@ margin:2px 0 4px;
   
   font-size: 20px;
   
-  margin: 6px 0;
+  margin: 4px 0;
   
 }
 
-.result-card {
-  
-  padding: 14px 6px;
-  
-}
+
 .result-card h2.correct-number {
   color: #16a34a;
 }
@@ -2777,10 +2921,9 @@ margin:2px 0 4px;
 }
 .test-summary-card {
   
-  margin: 14px 0;
+  margin: 6px 0;
   
-  padding: 14px;
-  
+ padding:12px 12px 8px;
 }
 
 .test-summary-title {
@@ -2809,7 +2952,7 @@ gap:6px;
   
   border-radius: 0;
   
-  padding: 4px 6px;
+  padding: 2px 4px;
   
 }
 
@@ -2836,16 +2979,26 @@ gap:6px;
   font-weight: 700;
   
 }
-  
+
+/* ... baki saara code same rahega, sabse niche ye add kijiye ... */
+
 .summary-icon {
-  
   font-size: 18px;
-  
   margin-bottom: 6px;
-  
-}
-  
 }
 
+/* YAHAN PAR CHANGE KAREIN */
+.result-buttons {
+  margin-top: 0px !important; /* Test Summary se extra gap hatane ke liye */
+  display: flex;
+  flex-direction: column; /* Buttons ko ek ke niche ek rakhne ke liye */
+  gap: 6px; /* Buttons ke aapas ke bich ka gap bhi 6px ho jayega */
+}
+
+.primary-btn, .secondary-btn, .telegram-btn {
+  margin-top: 0px !important; /* Individual buttons ka extra space clear karne ke liye */
+}
+  
+} /* Ye aapki media query ka closing bracket hai */  
 
 
