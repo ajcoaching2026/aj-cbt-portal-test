@@ -80,6 +80,65 @@ document.getElementById(
 
     `;
 }
+function showResumePopup(testName) {
+    
+    hideAllScreens();
+    
+    document.getElementById(
+        "landing-screen"
+    ).style.display = "block";
+    
+    document.getElementById(
+        "landing-screen"
+    ).innerHTML = `
+
+<div class="landing-box">
+
+    <img
+        src="assets/logo.png"
+        class="logo">
+
+    <h2 class="welcome-text">
+
+        Previous Test Found
+
+    </h2>
+
+    <p class="landing-subtitle">
+
+        Your previous test was found on this device.
+
+    </p>
+
+    <div style="margin-top:20px">
+
+        <button id="resumeTest">
+
+            ▶ Resume Test
+
+        </button>
+
+    </div>
+
+    <div style="margin-top:12px">
+
+        <button
+            id="startNewTest"
+            class="secondary-btn">
+
+            🔄 Start New Test
+
+        </button>
+
+    </div>
+
+</div>
+
+`;
+    
+}
+
+
 function showInstructions(
     instructionsHindi,
     instructionEnglish
@@ -285,7 +344,7 @@ document.getElementById(
     <div class="question-content">
 
         <div class="question-badge">
-    Q. ${index + 1}${index === 0 ? " • AJ02" : ""}
+    Q. ${index + 1}${index === 0 ? " • AJ03" : ""}
 </div>
 
         <div class="question-text">

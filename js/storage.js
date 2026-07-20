@@ -20,3 +20,22 @@ function loadState() {
 function clearState() {
     localStorage.removeItem(STORAGE_KEY);
 }
+function saveCurrentState() {
+    
+    saveState({
+        
+        version: 1,
+        
+        testCode: testCode || "",
+        
+        currentQuestion: currentQuestion,
+        
+        examStartTime: examStartTime,
+        
+        remainingTime: remainingTime,
+        
+        questions: questions
+        
+    });
+    
+}

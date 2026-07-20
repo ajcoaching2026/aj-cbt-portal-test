@@ -115,14 +115,38 @@ questionSource: row[36] || "",
         }
 
         setTimeout(() => {
-            showLanding(
-                questions[0].examName ||
-                CONFIG.APP_NAME
-            );
+    
+    const savedState = loadState();
+    
+   if (
+    CONFIG.AUTO_RESUME &&
+    savedState &&
+    savedState.version === 1 &&
+    savedState.questions &&
+    savedState.questions.length === questions.length &&
+    savedState.remainingTime > 0 &&
+    (savedState.testCode || "") === (testCode || "")
+) {
+    
+    console.log("Resume Found");
+    
+    showResumePopup(
+        questions[0].examName ||
+        CONFIG.APP_NAME
+    );
+    
+} else {
+    
+    showLanding(
+        questions[0].examName ||
+        CONFIG.APP_NAME
+    );
+    
+}
 
-            bindLandingEvents();
-        }, 1000);
-
+bindLandingEvents();
+    
+}, 1000);
     } catch (err) {
         console.error(err);
         alert("CSV Loading Failed");
@@ -140,6 +164,33 @@ function renderQuestion() {
     
 }
 function bindLandingEvents() {
+    const resumeBtn =
+    document.getElementById("resumeTest");
+
+if (resumeBtn) {
+    
+    resumeBtn.onclick = () => {
+        
+        restoreSavedTest();
+        
+    };
+    
+}
+
+const newTestBtn =
+    document.getElementById("startNewTest");
+
+if (newTestBtn) {
+    
+    newTestBtn.onclick = () => {
+        
+        clearState();
+        
+        location.reload();
+        
+    };
+    
+}
 
     const tgBtn =
         document.getElementById("joinTelegram");
@@ -192,6 +243,8 @@ if (questions[0].totalTimeMinutes) {
 
 startTimer(totalSeconds);
 
+saveCurrentState();
+
 renderQuestion();
                 };
             }
@@ -211,13 +264,17 @@ function bindQuestionEvents() {
         .querySelectorAll(".option-btn")
         .forEach(btn => {
 
-            btn.onclick = () => {
-
-                questions[currentQuestion]
-                    .userAnswer =
-                    btn.dataset.option;
-                renderQuestion();
-            };
+           btn.onclick = () => {
+    
+    questions[currentQuestion]
+        .userAnswer =
+        btn.dataset.option;
+    
+    saveCurrentState();
+    
+    renderQuestion();
+    
+};
         });
 
     const nextBtn =
@@ -251,8 +308,11 @@ if (nextBtn) {
             
         }
         
-        currentQuestion++;
-        renderQuestion();
+       currentQuestion++;
+
+saveCurrentState();
+
+renderQuestion();
         
     };
     
@@ -267,6 +327,7 @@ if (nextBtn) {
 
             if (currentQuestion > 0) {
                 currentQuestion--;
+                saveCurrentState();
                 renderQuestion();
             }
         };
@@ -283,6 +344,7 @@ if (nextBtn) {
                 .review =
                 !questions[currentQuestion]
                     .review;
+saveCurrentState();
 
             renderQuestion();
         };
@@ -344,7 +406,7 @@ document
                 parseInt(
                     btn.dataset.index
                 );
-            
+            saveCurrentState();
             renderQuestion();
             
         };
@@ -406,7 +468,7 @@ function bindResultEvents() {
     if (restartBtn) {
 
         restartBtn.onclick = () => {
-
+ clearState();
             location.reload();
 
         };
@@ -528,20 +590,54 @@ No
         };
     
     document
-        .getElementById("confirmSubmit")
-        .onclick = () => {
-            
-            document
-                .getElementById("submitModal")
-                .remove();
-            
-            const result =
-                calculateResult();
-            
-            showResult(result);
-            
-            bindResultEvents();
-            
-        };
+    .getElementById("confirmSubmit")
+    .onclick = () => {
+        
+        document
+            .getElementById("submitModal")
+            .remove();
+        
+        stopTimer();
+        
+        clearState();
+        
+        const result =
+            calculateResult();
+        
+        showResult(result);
+        
+        bindResultEvents();
+        
+    };
+}
+
+function restoreSavedTest() {
+    
+    const savedState = loadState();
+    
+    if (!savedState) {
+        
+        alert("No saved test found.");
+        
+        return;
+        
+    }
+    
+    questions = structuredClone(
+        savedState.questions
+    );
+    
+    currentQuestion =
+        savedState.currentQuestion || 0;
+    
+    remainingTime =
+        savedState.remainingTime || 0;
+    
+    examStartTime =
+        savedState.examStartTime || Date.now();
+    
+    renderQuestion();
+    
+    startTimer(remainingTime);
     
 }
