@@ -344,14 +344,12 @@ document.getElementById(
     <div class="question-content">
 
         <div class="question-badge">
-    Q. ${index + 1}${index === 0 ? " • AJ04" : ""}
+    Q. ${index + 1}${index === 0 ? " • AJ03" : ""}
 </div>
 
         <div class="question-text">
-
-    ${renderQuestionText(question.question)}
-
-</div>
+            ${renderQuestionText(question.question)}
+        </div>
 
     </div>
 

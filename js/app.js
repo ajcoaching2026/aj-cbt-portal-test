@@ -60,9 +60,7 @@ const parsed = Papa.parse(
 
 const rows = parsed.data;
         const headers = rows[0];
-        
-        const testName = rows[1]?.[26] || "";
-        
+    
         questions = rows.slice(1).map(row => ({
             question: row[1] || "",
             
@@ -84,33 +82,21 @@ const rows = parsed.data;
         /_(.*?)_/g,
         "<u>$1</u>"
     ),
-
     topicTadka: (row[8] || ""),
-
             aiAnswer: row[12] || "",
-
            answerNumber: row[13] || "",
-
-examName: testName,
-
-examSource: row[27] || "",
-    
+examName: row[15] || "",
     telegramLink: row[19] || "",
-
 totalTimeMinutes:
     parseInt(row[20]) || "",
-
 positiveMarks: parseFloat(row[21]) || 1,
-
 negativeMarks: parseFloat(row[22]) || 0,
-            
             option5Text: row[23] || "",
-            
             instructionsHindi: row[24] || "",
-            
             instructionEnglish: row[25] || "",
-            
-            difficulty: row[28] || "",
+            subject: row[26] || "",
+topic: row[27] || "",
+difficulty: row[28] || "",
 questionImage: row[29] || "",
 solutionImage: row[30] || "",
 pauseAllowed: row[31] || "",
