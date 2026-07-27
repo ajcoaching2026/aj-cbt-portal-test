@@ -348,8 +348,10 @@ document.getElementById(
 </div>
 
         <div class="question-text">
-            ${renderQuestionText(question.question)}
-        </div>
+
+    ${renderQuestionText(question.question)}
+
+</div>
 
     </div>
 

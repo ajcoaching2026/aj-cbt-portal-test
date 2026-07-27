@@ -966,6 +966,33 @@ white-space: pre-line;
   margin: -2px 0 0;
   
 }
+.question-exam-source {
+  
+  width: 100%;
+  
+  align-self: stretch;
+  
+  margin: 0;
+  
+  margin-top: -2px;
+  
+  padding: 0;
+  
+  text-align: right;
+  
+  font-size: 13px;
+  
+  font-weight: 600;
+  
+  color: #666;
+  
+  line-height: 1.15;
+  
+  white-space: pre-line;
+  
+  box-sizing: border-box;
+  
+}
 
 .question-divider {
   
