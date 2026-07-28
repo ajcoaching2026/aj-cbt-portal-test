@@ -170,7 +170,7 @@ document.getElementById(
 </h3>
 
 <p>
-    ${instructionsHindi || ""}
+    ${formatText(instructionsHindi || "")}
 </p>
 
 <hr>
@@ -180,7 +180,7 @@ document.getElementById(
 </h3>
 
 <p>
-    ${instructionEnglish || ""}
+    ${formatText(instructionEnglish || "")}
 </p>
 </div>
 
@@ -336,7 +336,7 @@ document.getElementById(
 
 <div class="exam-title-bar">
 
-    ${question.examName || ""}
+    ${question.examHeader || question.examName}
 
 </div>      
       <div class="question-box">
@@ -348,8 +348,8 @@ document.getElementById(
 </div>
 
         <div class="question-text">
-            ${renderQuestionText(question.question)}
-        </div>
+    ${renderQuestionText(question.question)}
+</div>
 
     </div>
 
