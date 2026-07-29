@@ -24,7 +24,9 @@ function saveCurrentState() {
     
     saveState({
         
-        version: 1,
+        version: 2,
+        
+        status: "in_progress",
         
         testCode: testCode || "",
         
@@ -34,7 +36,32 @@ function saveCurrentState() {
         
         remainingTime: remainingTime,
         
-        questions: questions
+        questions: questions,
+        
+        result: null
+        
+    });
+    
+}
+function saveSubmittedState(result) {
+    
+    saveState({
+        
+        version: 2,
+        
+        status: "submitted",
+        
+        testCode: testCode || "",
+        
+        currentQuestion: currentQuestion,
+        
+        examStartTime: examStartTime,
+        
+        remainingTime: remainingTime,
+        
+        questions: questions,
+        
+        result: result
         
     });
     

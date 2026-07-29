@@ -136,10 +136,16 @@ questionSource: row[36] || "",
    if (
     CONFIG.AUTO_RESUME &&
     savedState &&
-    savedState.version === 1 &&
+    (
+        savedState.version === 1 ||
+        savedState.version === 2
+    ) &&
     savedState.questions &&
     savedState.questions.length === questions.length &&
-    savedState.remainingTime > 0 &&
+    (
+    savedState.status === "submitted" ||
+    savedState.remainingTime > 0
+) &&
     (savedState.testCode || "") === (testCode || "")
 ) {
     
@@ -185,8 +191,29 @@ function bindLandingEvents() {
 if (resumeBtn) {
     
     resumeBtn.onclick = () => {
+    
         
-        restoreSavedTest();
+        const savedState = loadState();
+        
+        if (savedState && savedState.status === "submitted") {
+    
+    questions = structuredClone(savedState.questions);
+    
+    currentQuestion = savedState.currentQuestion || 0;
+    
+    remainingTime = savedState.remainingTime || 0;
+    
+    examStartTime = savedState.examStartTime || Date.now();
+    
+    showResult(savedState.result);
+    
+    bindResultEvents();
+    
+} else {
+    
+    restoreSavedTest();
+    
+}
         
     };
     
@@ -613,13 +640,12 @@ No
             .remove();
         
         stopTimer();
-        
-        clearState();
-        
-        const result =
-            calculateResult();
-        
-        showResult(result);
+
+const result = calculateResult();
+
+saveSubmittedState(result);
+
+showResult(result);
         
         bindResultEvents();
         

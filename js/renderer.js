@@ -344,7 +344,7 @@ document.getElementById(
     <div class="question-content">
 
         <div class="question-badge">
-    Q. ${index + 1}${index === 0 ? " • AJ03" : ""}
+    Q. ${index + 1}${index === 0 ? " • AJ04" : ""}
 </div>
 
         <div class="question-text">
@@ -427,6 +427,7 @@ document.getElementById(
 }
 
 function showResult(result) {
+    hideAllScreens();
     document.getElementById("exam-screen").style.display = "none";
 
 document.getElementById("result-screen").style.display = "block";
