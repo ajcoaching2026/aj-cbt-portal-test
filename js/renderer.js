@@ -344,7 +344,7 @@ document.getElementById(
     <div class="question-content">
 
         <div class="question-badge">
-    Q. ${index + 1}${index === 0 ? " • AJ04" : ""}
+    Q. ${index + 1}${index === 0 ? " • AJ05" : ""}
 </div>
 
         <div class="question-text">
@@ -798,9 +798,12 @@ function createPalette() {
 
 function createReviewPalette() {
     
+    const filteredQuestions =
+    getFilteredReviewQuestions();
+    
     let html = "";
     
-    questions.forEach((q, index) => {
+    filteredQuestions.forEach((q, index) => {
         
         let colorClass = "";
         
@@ -835,16 +838,10 @@ function createReviewPalette() {
         
         html += `
 <button
-    class="palette-btn ${colorClass}"
+    class="review-palette-btn ${colorClass}"
     data-index="${index}">
 
-    ${
-        q.review
-        ? `<span class="palette-star">★</span>`
-        : ""
-    }
-
-    ${index + 1}
+    ${q.index + 1}
 
 </button>
 `;
@@ -936,9 +933,26 @@ document.getElementById(
         <h2>Review Answers</h2>
 
         <div class="question-number">
-          Question ${index + 1} / ${filteredQuestions.length}
+            Question ${index + 1} / ${filteredQuestions.length}
         </div>
-        <div class="review-filters">
+
+    </div>
+
+    <button
+    id="openReviewPalette"
+    class="review-top-btn"
+    title="Questions">
+
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+
+</button>
+
+</div>
+
+<div class="review-filters">
 
     <button
 class="review-filter ${
@@ -991,18 +1005,6 @@ Unattempted
 </button>
 
 </div>
-
-    </div>
-
-    <button
-        id="openReviewPalette"
-        class="review-top-btn">
-
-        📋 Questions
-
-    </button>
-    </div>
-
 <div class="question-box">
 
     <div class="question-content">
@@ -1169,25 +1171,23 @@ ${
 
 
 <div
+   
     id="reviewPaletteDrawer"
-    class="palette-drawer">
+    class="review-palette-drawer">
 
-    <div class="palette-header">
+    <div class="review-palette-header">
 
-        <h3>
-            Questions
-        </h3>
+    <button
+        id="closeReviewPalette"
+        class="palette-back-btn">
 
-        <button
-            id="closeReviewPalette">
+        ←
 
-            ✕
+    </button>
 
-        </button>
+</div>
 
-    </div>
-
-    <div class="palette-grid">
+    <div class="review-palette-grid">
 
        ${createReviewPalette()}
 
@@ -1312,7 +1312,7 @@ document
 
 document
     .querySelectorAll(
-        "#reviewPaletteDrawer .palette-btn"
+     "#reviewPaletteDrawer .review-palette-btn"
     )
     .forEach(btn => {
         
