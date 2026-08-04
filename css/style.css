@@ -447,26 +447,29 @@ padding: 2px 16px 8px;
   
   align-items: center;
   
-  margin-bottom: 15px;
+  margin-bottom: 18px;
+   padding-left:4px;
+ 
+ padding-top:4px;
   
 }
 .review-palette-back-btn {
   
-  width: 38px;
+  width: 46px;
   
-  height: 38px;
+  height: 46px;
   
   border: none;
   
-  border-radius: 10px;
+  border-radius: 14px;
   
-  background: #f3f4f6;
+  background: linear-gradient(135deg, #ffffff, #f8fbff);
   
-  color: #2563eb;
+  color: #1d4ed8;
   
-  font-size: 22px;
+  font-size: 34px;
   
-  font-weight: 700;
+  font-weight: 900;
   
   cursor: pointer;
   
@@ -476,18 +479,32 @@ padding: 2px 16px 8px;
   
   justify-content: center;
   
-  transition: .25s;
+  box-shadow: 0 8px 22px rgba(37, 99, 235, .22);
+  
+  border: 1px solid #dbeafe;
+  
+  transition: all .22s ease;
   
 }
 
 .review-palette-back-btn:hover {
   
-  background: #e5e7eb;
+  background: #eff6ff;
+  
+  transform: translateY(-2px);
+  
+  box-shadow: 0 10px 22px rgba(37, 99, 235, .22);
+  
+}
+
+.review-palette-back-btn:active {
+  
+  transform: scale(.94);
   
 }
 .review-palette-grid {
   
-  flex: unset;
+  flex: 1;
   
   overflow-y: auto;
   
@@ -533,8 +550,11 @@ align-content:flex-start;
   transition: all .22s ease;
   
   box-shadow: 0 3px 8px rgba(15, 23, 42, .08);
+  position: relative;
   
 }
+
+
 .review-palette-btn:hover {
   
   transform: translateY(-2px);
@@ -580,7 +600,11 @@ color:white;
 background:#ff4d4d;
 color:white;
 }
-
+.palette-option-e {
+  
+ background: #8B5CF6;
+color: #FFFFFF;
+}
 .bottom-actions {
   
   display: flex;
@@ -993,9 +1017,6 @@ gap: 4px;
   bottom: 20px;
 }
 
-.review-palette-btn {
-  bottom: 140px  !important;
-}
 .review-header {
   
   display: flex;
@@ -1177,6 +1198,13 @@ gap: 4px;
   color: #ca8a04;
   
 }
+.review-filter[data-filter="optionE"] {
+  
+  background: #F3E8FF;
+  
+  color: #7C3AED;
+  
+}
 
 .review-filter[data-filter="unattempted"] {
   
@@ -1299,7 +1327,7 @@ white-space: pre-line;
   
   align-items: start;
   
-  padding: 10px 14px;
+  padding: 20px 14px 12px;
   
   margin-bottom: 0;
   
@@ -1312,7 +1340,95 @@ white-space: pre-line;
   color: #111827;
   
   cursor: pointer;
+
+position:relative;
+  overflow: visible;
+  isolation:isolate;
+  min-height:58px;
+}
+
+
+.option-inner {}
+.option-content {
   
+  display: flex;
+  
+  align-items: flex-start;
+  
+  gap: 10px;
+  
+  padding-top: 6px;
+  width:100%;
+
+  
+}
+.option-floating-tag {
+  
+  position: absolute;
+  
+  top: -8px;
+  
+  right: 10px;
+  
+  left: auto;
+  
+  display: block;
+  
+  height: auto;
+  
+  padding: 0 8px;
+  
+  background: #fff;
+  
+  font-size: 12px;
+  
+  font-weight: 700;
+  
+  line-height: 1.1;
+  
+  letter-spacing: .2px;
+  
+  border-radius: 0;
+  
+  white-space: nowrap;
+  
+  z-index: 30;
+  
+}
+.option-legend {
+  
+  background: #fff;
+  
+}
+
+.correct-tag {
+  
+  color: #43a047;
+}
+  
+.wrong-tag {
+  
+  color: #f44336;
+  
+}
+.neutral-tag {
+  
+  color: #757575;
+  
+}
+
+
+.option-btn.correct {
+  background: #fff;
+  border:2px solid #41b35d;
+  box-shadow:0 2px 8px rgba(65,179,93,.10);
+}
+
+.option-btn.wrong {
+  
+  background: #fff;
+  border:2px solid #ef5350;
+  box-shadow:0 2px 8px rgba(239,83,80,.10);
 }
 .option-label {
   
@@ -2742,6 +2858,97 @@ box-shadow:0 10px 28px rgba(37,99,235,.28);
   
 }
 
+.start-new-btn {
+  
+  width: 170px;
+  
+  height: 40px;
+  
+  background: #fff;
+  
+  border: 2px solid #fed7aa;
+  
+  border-radius: 14px;
+  
+  color: #ea580c;
+  
+  font-size: 15px;
+  
+  font-weight: 700;
+  
+  cursor: pointer;
+  
+  transition: .25s;
+  
+  box-shadow: 0 4px 12px rgba(249, 115, 22, .06);
+  
+  display: block;
+  
+  margin: 12px auto 0;
+  
+}
+
+.start-new-btn:hover {
+  
+  background: #fff7ed;
+  
+  transform: translateY(-1px);
+  
+}
+
+.start-new-btn:active {
+  
+  transform: scale(.98);
+  
+}
+
+.resume-btn {
+  
+  width: 170px;
+  
+  height: 40px;
+  
+  background: #fff;
+  
+  border: 2px solid #3b82f6;
+  
+  border-radius: 14px;
+  
+  color: #2563eb;
+  
+  font-size: 15px;
+  
+  font-weight: 700;
+  
+  cursor: pointer;
+  
+  transition: .25s;
+  
+  box-shadow: 0 4px 12px rgba(37, 99, 235, .08);
+  
+  display: block;
+  
+  margin: 0 auto;
+  
+}
+
+.resume-btn:hover {
+  
+  background: #eff6ff;
+  
+  transform: translateY(-1px);
+  
+}
+
+.resume-btn:active {
+  
+  transform: scale(.98);
+  
+}
+
+
+
+
 .secondary-btn {
   background:#fff;
 
@@ -3348,5 +3555,3 @@ gap:6px;
 }
   
 } /* Ye aapki media query ka closing bracket hai */  
-
-

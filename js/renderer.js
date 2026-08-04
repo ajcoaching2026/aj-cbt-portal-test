@@ -112,11 +112,13 @@ function showResumePopup(testName) {
 
     <div style="margin-top:20px">
 
-        <button id="resumeTest">
+        <button
+    id="resumeTest"
+    class="resume-btn">
+    
+    ▶ Resume Test
 
-            ▶ Resume Test
-
-        </button>
+</button>
 
     </div>
 
@@ -124,7 +126,7 @@ function showResumePopup(testName) {
 
         <button
             id="startNewTest"
-            class="secondary-btn">
+            class="start-new-btn">
 
             🔄 Start New Test
 
@@ -261,13 +263,48 @@ function renderOptions(question, mode = "exam") {
         ? `data-option="${optionNo}"`
         : ""}>
 
-    <span class="option-label">
-        ${optionLabel}.
-    </span>
+${
+mode === "review" &&
+question.answerNumber === optionNo
+?
+`
+<div class="option-floating-tag option-legend correct-tag">
+Correct Answer
+</div>
+`
+:
+""
+}
 
-    <span class="option-text">
-    ${renderOptionText(text)}
+${
+mode === "review" &&
+question.userAnswer === optionNo &&
+question.answerNumber !== optionNo
+?
+`
+<div class="option-floating-tag option-legend ${
+optionNo === "5"
+? "neutral-tag"
+: "wrong-tag"
+}">
+Your Answer
+</div>
+`
+:
+""
+}
+
+<div class="option-content">
+
+<span class="option-label">
+${optionLabel}.
 </span>
+
+<span class="option-text">
+${renderOptionText(text)}
+</span>
+
+</div>
 
 </button>
 
@@ -344,7 +381,7 @@ document.getElementById(
     <div class="question-content">
 
         <div class="question-badge">
-    Q. ${index + 1}${index === 0 ? " • AJ05" : ""}
+    Q. ${index + 1}${index === 0 ? " • AJ06" : ""}
 </div>
 
         <div class="question-text">
@@ -780,13 +817,13 @@ function createPalette() {
             class="palette-btn ${colorClass}"
             data-index="${index}">
 
-            ${
+    ${
     q.review ?
         `<span class="palette-star">★</span>` :
         ""
 }
 
-            ${index + 1}
+${ index + 1 }
 
         </button>
         `;
@@ -799,7 +836,7 @@ function createPalette() {
 function createReviewPalette() {
     
     const filteredQuestions =
-    getFilteredReviewQuestions();
+        getFilteredReviewQuestions();
     
     let html = "";
     
@@ -808,46 +845,53 @@ function createReviewPalette() {
         let colorClass = "";
         
         if (
-            q.review &&
-            !q.userAnswer
-        ) {
-            
-            colorClass = "palette-review";
-            
-        } else if (
-            q.userAnswer &&
-            q.userAnswer ==
-            q.answerNumber
-        ) {
-            
-            colorClass = "palette-correct";
-            
-        } else if (
-            q.userAnswer &&
-            q.userAnswer !=
-            q.answerNumber
-        ) {
-            
-            colorClass = "palette-wrong";
-            
-        } else {
-            
-            colorClass = "palette-unanswered";
-            
-        }
-        
+    q.userAnswer &&
+    q.userAnswer == q.answerNumber
+) {
+    
+    colorClass = "palette-correct";
+    
+} else if (
+    q.userAnswer &&
+    q.userAnswer != q.answerNumber &&
+    q.userAnswer != "5"
+) {
+    
+    colorClass = "palette-wrong";
+    
+} else if (
+    q.userAnswer == "5"
+) {
+    
+    colorClass = "palette-option-e";
+    
+} else {
+    
+    colorClass = "palette-unanswered";
+    
+}        
         html += `
+
 <button
     class="review-palette-btn ${colorClass}"
     data-index="${index}">
 
+    ${
+        q.review
+        ? `<span class="palette-star">★</span>`
+        : ""
+    }
+
     ${q.index + 1}
 
 </button>
+
 `;
+        
     });
     
     return html;
+    
 }
 function getFilteredReviewQuestions() {
     
@@ -864,14 +908,14 @@ function getFilteredReviewQuestions() {
                 );
             
         case "wrong":
-            
-            return questions
-                .map((q, i) => ({ ...q, index: i }))
-                .filter(q =>
-                    q.userAnswer &&
-                    q.userAnswer !=
-                    q.answerNumber
-                );
+
+return questions
+    .map((q, i) => ({ ...q, index: i }))
+    .filter(q =>
+        q.userAnswer &&
+        q.userAnswer != q.answerNumber &&
+        q.userAnswer != "5"
+    );
             
         case "review":
             
@@ -880,7 +924,13 @@ function getFilteredReviewQuestions() {
                 .filter(q =>
                     q.review === true
                 );
-            
+        case "optionE":
+
+return questions
+    .map((q, i) => ({ ...q, index: i }))
+    .filter(q =>
+        q.userAnswer == "5"
+    );    
         case "unattempted":
             
             return questions
@@ -993,6 +1043,15 @@ currentReviewFilter==="review"
 data-filter="review">
 Review
 </button>
+<button
+class="review-filter ${
+currentReviewFilter==="optionE"
+? "active"
+: ""
+}"
+data-filter="optionE">
+Option E
+</button>
 
     <button
 class="review-filter ${
@@ -1028,73 +1087,7 @@ Unattempted
     ${renderOptions(currentQuestion, "review")}
 
 </div>
-<div class="review-summary">
 
-    <div class="review-answer-box">
-
-        <strong>Your Answer:</strong>
-
-        ${
-            currentQuestion.userAnswer
-            ? String.fromCharCode(
-                64 +
-                parseInt(
-                    currentQuestion.userAnswer
-                )
-            )
-            : "Not Attempted"
-        }
-
-    </div>
-
-    <div class="review-answer-box">
-
-        <strong>Correct Answer:</strong>
-
-        ${
-            String.fromCharCode(
-                64 +
-                parseInt(
-                    currentQuestion.answerNumber
-                )
-            )
-        }
-
-    </div>
-
-  ${
-(
-currentQuestion.review &&
-!currentQuestion.userAnswer
-)
-||
-currentQuestion.userAnswer
-?
-`
-<div class="review-answer-box
-${
-currentQuestion.userAnswer &&
-currentQuestion.userAnswer ==
-currentQuestion.answerNumber
-? "status-correct"
-: "status-wrong"
-}">
-${
-currentQuestion.review &&
-!currentQuestion.userAnswer
-? "🟨 Marked For Review"
-
-: currentQuestion.userAnswer ==
-currentQuestion.answerNumber
-? "✅ Correct"
-
-: "❌ Incorrect"
-}
-</div>
-`
-: ""
-}
-</div>
 <div class="review-explanation">
 
     <h3>📖 Explanation</h3>
@@ -1294,9 +1287,7 @@ if (
 }
 
 document
-    .querySelectorAll(
-        ".review-filter"
-    )
+    .querySelectorAll(".review-filter")
     .forEach(btn => {
         
         btn.onclick = () => {
@@ -1306,23 +1297,38 @@ document
             
             showReviewScreen(0);
             
+            setTimeout(() => {
+                
+                document
+                    .querySelector(
+                        ".review-filter.active"
+                    )
+                    ?.scrollIntoView({
+                        
+                        behavior: "smooth",
+                        
+                        inline: "center",
+                        
+                        block: "nearest"
+                        
+                    });
+                
+            }, 0);
+            
         };
         
     });
-
 document
     .querySelectorAll(
-     "#reviewPaletteDrawer .review-palette-btn"
+        "#reviewPaletteDrawer .review-palette-btn"
     )
     .forEach(btn => {
         
         btn.onclick = () => {
             
             showReviewScreen(
-                parseInt(
-                    btn.dataset.index
-                )
-            );
+    parseInt(btn.dataset.index)
+);
             
         };
         
@@ -1422,5 +1428,23 @@ document.addEventListener(
         
     }
 );
+const activeFilter =
+    document.querySelector(
+        ".review-filter.active"
+    );
+
+if (activeFilter) {
+    
+    activeFilter.scrollIntoView({
+        
+        behavior: "instant",
+        
+        inline: "center",
+        
+        block: "nearest"
+        
+    });
+    
+}
 window.scrollTo(0, 0);
 }
