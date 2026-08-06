@@ -265,7 +265,20 @@ function renderOptions(question, mode = "exam") {
 
 ${
 mode === "review" &&
-question.answerNumber === optionNo
+    question.answerNumber === optionNo &&
+    (
+        (
+            question.userAnswer &&
+            question.userAnswer != question.answerNumber &&
+            question.userAnswer != "5"
+        ) ||
+        (
+            question.review &&
+            question.userAnswer &&
+            question.userAnswer != question.answerNumber &&
+            question.userAnswer != "5"
+        )
+    )
 ?
 `
 <div class="option-floating-tag option-legend correct-tag">
@@ -275,7 +288,19 @@ Correct Answer
 :
 ""
 }
-
+${
+mode === "review" &&
+question.userAnswer === optionNo &&
+question.answerNumber === optionNo
+?
+`
+<div class="option-floating-tag option-legend correct-tag">
+Your Answer
+</div>
+`
+:
+""
+}
 ${
 mode === "review" &&
 question.userAnswer === optionNo &&
@@ -381,7 +406,7 @@ document.getElementById(
     <div class="question-content">
 
         <div class="question-badge">
-    Q. ${index + 1}${index === 0 ? " • AJ06" : ""}
+    Q. ${index + 1}${index === 0 ? " • AJ06.1" : ""}
 </div>
 
         <div class="question-text">

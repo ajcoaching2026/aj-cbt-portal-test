@@ -2475,15 +2475,18 @@ box-shadow:0 10px 28px rgba(37,99,235,.28);
   
   align-items: center;
   
-  gap: 16px;
+  gap: 8px;
   
 }
 
 .score-trophy {
   
-  width: 88px;
+  width: 388px;
   
-  height: 88px;
+  height: 120px;
+  
+  padding-top: 0px;
+  padding-bottom: 2px;
   
   display: flex;
   
@@ -2493,15 +2496,29 @@ box-shadow:0 10px 28px rgba(37,99,235,.28);
   
   flex-shrink: 0;
   
+  position: relative;
+  
+  z-index: 2;
+  
   overflow: visible;
   
 }
+
+.score-trophy img {
+  
+  width: 185px;
+  
+  height: auto;
+  min-height: 165px;
+}
+
 
 .score-content {
   
   display: flex;
   
   flex-direction: column;
+  padding-left: 14px;
   
 }
 
@@ -2509,7 +2526,7 @@ box-shadow:0 10px 28px rgba(37,99,235,.28);
   
   color: rgba(255, 255, 255, .82);
   
-  font-size: 15px;
+  font-size: 18px;
   
   font-weight: 600;
   
@@ -2521,7 +2538,7 @@ box-shadow:0 10px 28px rgba(37,99,235,.28);
   
   color: #fff;
   
-  font-size: 34px;
+  font-size: 40px;
   
   font-weight: 800;
   
@@ -2531,7 +2548,7 @@ box-shadow:0 10px 28px rgba(37,99,235,.28);
 
 .score-main span {
   
-  font-size: 18px;
+  font-size: 22px;
   
   font-weight: 600;
   
@@ -3191,7 +3208,7 @@ letter-spacing:0;
   
   flex: 1;
   
-  padding-left: 0px;
+  padding-left: 50px;
   
   z-index: 2;
   
